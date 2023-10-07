@@ -44,6 +44,12 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+## Express Types
+
+```bash
+# development
+$ npm i @types/express --save-dev
+```
 
 ## Test
 
