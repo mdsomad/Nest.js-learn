@@ -1,76 +1,64 @@
 import {
   Controller,
-  Post,
   Get,
-  HttpCode,
-  HttpStatus,
-  Req,
-  Res,
-  Header,
-  Redirect
+  Param,
+  Query,
+  Headers
 } from '@nestjs/common';
-import { Request, Response } from 'express';
-
-// @Controller('users') //* <-- Iska naam hai decorator
-// export class Usercontroller {
-//   @Post('profile')
-//   // @HttpCode(200)
-//   @HttpCode(HttpStatus.ACCEPTED)
-//   getProfile(@Req() req: Request, @Res({ passthrough: true }) resp: Response) {
-
-//     resp.status(200)
-//     return {
-//       Hello: ' Somad',
-//     };
-//   }
-// }
 
 
+interface videosparams {
+  id:number,
+  name:string
+}
+interface queryParam {
+  age:number,
+  name:string
+}
 
 
-
-
-//TODO: Set Header
 @Controller('users') //* <-- Iska naam hai decorator
 export class Usercontroller {
-  @Post('profile')
-  // @Header('Cache-Control',"none")
-  // @Header('X-Name',"somad"),
-  @Redirect('/users/account',302)       //* <-- Static Route Use This Method  
-  getProfile(@Req() req: Request) {
+  @Get('/videos/:id/:name')
+  getVideos(@Param() params:videosparams) {
+    console.log(params);
+    return 'Success';
+  }
 
-    //* Dynamically switch Route Use This method
-    const rn = (Math.random()* 10 + 1);
 
-    console.log(rn)
-    
-    if(rn < 5 ){
-      return {
-        url: '/users/account',
-        statusCode:302
-      }
-    }else{
-      return {
-        url: '/users/wallet',
-        statusCode:302
-      }
-    }
-    
-    
+  //* no data type defined params
+  // @Get('/videos/:id')
+  // getVideos(@Param() params:Record<string,any>) {
+  //   console.log(params);
+  //   return 'Success';
+  // }
+
+
+
+   //* QueryParam use
+  @Get('/videos2')
+  getVideos2(@Query() query:queryParam) {
+    console.log(query);
+    console.log(query.name);
+    return 'Success';
   }
 
 
 
-
-  @Get('/account')
-  redirectRoute(){
-    console.log('Working account called')
-     return "Working account";
+   //* headers data get
+  @Get('/headers')
+  getHeaders(@Headers() headers:Record<string,any>) {
+    console.log(headers);
+    return 'Success';
   }
+  
+  
 
-  @Get('/wallet')
-  redirectWallet(){
-    console.log('Working wallet called')
-     return "Working wallet";
-  }
+
 }
+
+
+
+
+
+
