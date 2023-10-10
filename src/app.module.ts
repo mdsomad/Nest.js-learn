@@ -1,14 +1,17 @@
 import { Module } from '@nestjs/common';
 import { Usercontroller } from './user.controller';
-import { UsersStore } from './store/users.store';
-import { Store } from './store/store';
+import { Config } from './config';
 
 @Module({
   controllers: [Usercontroller],
-  // providers:[{provide: UsersStore, useClass: UsersStore}]
-  // providers:[UsersStore]
-  // providers:[{provide: 'STORE', useClass: UsersStore}]
-  // providers:[{provide: UsersStore, useClass:Store}]
-  providers:[UsersStore, {provide: Store,useExisting: UsersStore}]
+  providers:[
+    {provide: "DATABASE_NAME",useValue:"SON_NIGHT"},
+    {provide: "MAN",useValue:["Md Somad", "Amir"]},
+    {provide: Config,useValue:{
+      type:'DEV',
+      note:"18"
+    }},
+  ]
+
 })
 export class AppModule {}

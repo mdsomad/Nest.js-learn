@@ -1,24 +1,22 @@
-import { Controller ,Get,Optional,Inject} from '@nestjs/common';
-import { UsersStore } from './store/users.store';
-import { Store } from './store/store';
+import { Controller , Inject} from '@nestjs/common';
+import { Config } from './config';
 
 @Controller('users')                                                  //* <-- Iska naam hai decorator             //* <-- Iska naam hai decorator
 export class Usercontroller {
-//  constructor(private store:UsersStore){
-//   console.log(this.store);
-//  }
 
-//  constructor(@Optional() private store:UsersStore){
-//   console.log(this.store);
+//  constructor(@Inject("DATABASE_NAME") private dbname: string){
+//     console.log(this.dbname)
 //  }
-
- constructor( private store:Store){
-  console.log(this.store);
+//  constructor(@Inject("MAN") private names: []){
+//     console.log(this.names)
+//  }
+ constructor( private config:Config){
+    console.log(this.config)
  }
 
 
 
-
+   
 
 
 }
